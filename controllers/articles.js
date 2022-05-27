@@ -28,6 +28,11 @@ router.delete('/:id', (req, res) => {
 });
 
 // Update
+router.put('/:id', (req, res) => {
+    Article.findByIdAndUpdate(req.params.id, req.body, (err, updatedArticle) => {
+        res.redirect(`/articles/${updatedArticle._id}`);
+    });
+});
 
 // Create
 router.post('/', (req, res) => {
