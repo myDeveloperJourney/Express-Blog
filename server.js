@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const express = require("express");
 const methodOverride = require("method-override");
 const authorsController = require("./controllers/authors");
+const articlesController = require("./controllers/articles");
+
 const app = express();
 
 const PORT = 3000;
@@ -22,6 +24,7 @@ db.on("disconnected", () => console.log("mongo has disconnected"));
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: false }));
 app.use("/authors", authorsController);
+app.use("/articles", articlesController);
 
 app.get("/", (req, res) => {
 	res.render("index.ejs");
