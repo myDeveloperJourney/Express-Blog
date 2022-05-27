@@ -19,6 +19,9 @@
     <main>
         <section>
             <%= article.body %>
+            <form action="/articles/<%= article._id %>?_method=DELETE" method="POST">
+                <input type="submit" value="DELETE this article">
+            </form>
         </section>
     </main>
 </body>

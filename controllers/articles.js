@@ -19,6 +19,14 @@ router.get('/new', (req, res) => {
     res.render('articles/new.ejs');
 });
 
+
+// Delete
+router.delete('/:id', (req, res) => {
+    Article.findByIdAndDelete(req.params.id, (err, deletedArticle) => {
+        res.redirect('/articles');
+    });
+});
+
 // Create
 router.post('/', (req, res) => {
     Article.create(req.body, (err, createdArticle) => {
