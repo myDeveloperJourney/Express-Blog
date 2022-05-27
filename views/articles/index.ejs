@@ -16,5 +16,12 @@
             </ul>
         </nav>
     </header>
+    <ul>
+        <% for (let i = 0; i < articles.length; i++) { %>
+            <li>
+                <a href="/articles/<%= articles[i]._id %>"><%= articles[i].title %></a>
+            </li>
+        <% } %>
+    </ul>
 </body>
 </html>
