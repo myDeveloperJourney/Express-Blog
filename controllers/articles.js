@@ -27,6 +27,8 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+// Update
+
 // Create
 router.post('/', (req, res) => {
     Article.create(req.body, (err, createdArticle) => {
@@ -34,6 +36,16 @@ router.post('/', (req, res) => {
         res.redirect('/articles');
     });
 });
+
+// Edit
+router.get('/:id/edit', (req, res) => {
+    Article.findById(req.params.id, (err, foundArticle) => {
+        res.render('articles/edit.ejs', {
+            article: foundArticle
+        });
+    });
+});
+
 
 // Show
 router.get('/:id', (req, res) => {
