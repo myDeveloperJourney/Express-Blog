@@ -27,5 +27,14 @@ router.post('/', (req, res) => {
     });
 });
 
+// Show
+router.get('/:id', (req, res) => {
+    Article.findById(req.params.id, (err, foundArticle) => {
+        res.render('articles/show.ejs', {
+            article: foundArticle
+        });
+    });
+});
+
 // export our router object
 module.exports = router;
