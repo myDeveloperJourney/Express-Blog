@@ -2,7 +2,7 @@
 // initialize the router object
 const router = require('express').Router();
 const Article = require('../models/article');
-
+const Author = require('../models/author');
 // define routes
 
 // Index
@@ -16,7 +16,9 @@ router.get('/', (req, res) => {
 
 // New
 router.get('/new', (req, res) => {
-    res.render('articles/new.ejs');
+    Author.find({}, (err, authors) => {
+        res.render('articles/new.ejs', { authors });
+    });
 });
 
 
@@ -54,9 +56,19 @@ router.get('/:id/edit', (req, res) => {
 
 // Show
 router.get('/:id', (req, res) => {
-    Article.findById(req.params.id, (err, foundArticle) => {
+    Article.findById(req.params.id).populate('authoredBy').exec((err, foundArticle) => {
         res.render('articles/show.ejs', {
             article: foundArticle
+        });
+    });
+});
+
+// add reviews to articles
+router.post('/:id/reviews', (req, res) => {
+    Article.findById(req.params.id, (err, article) => {
+        article.reviews.push(req.body);
+        article.save(() => {
+            res.redirect(`/articles/${article._id}`);
         });
     });
 });

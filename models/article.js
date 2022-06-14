@@ -3,10 +3,20 @@ const mongoose = require('mongoose');
 // initialize shortcut variable
 const Schema = mongoose.Schema;
 
+const reviewSchema = new Schema({
+    body: String,
+    rating: Number
+});
+
 // initialize schema
 const articleSchema = new Schema({
     title: String,
-    body: String
+    body: String,
+    authoredBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'Author'
+    },
+    reviews: [reviewSchema]
 });
 
 // export our model

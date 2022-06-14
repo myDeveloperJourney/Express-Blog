@@ -20,6 +20,13 @@
     <main>
         <form action="/articles" method="POST">
             <div>
+                <select name="authoredBy">
+                    <% authors.forEach(a => { %>
+                        <option value="<%= a._id %>"><%= a.name %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div>
                 <input type="text" name="title">
             </div>
             <div>
