@@ -18,7 +18,7 @@ db = mongoose.connection;
 db.on("error", (err) =>
 	console.log(`${err.message}  is mongodb not connected?`)
 );
-db.on("connected", () => console.log("MONGO is connected :) !"));
+db.on("connected", () => console.log("MONGO is connected"));
 db.on("disconnected", () => console.log("mongo has disconnected"));
 
 app.use(methodOverride("_method"));
